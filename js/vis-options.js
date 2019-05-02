@@ -111,7 +111,7 @@ var options = {
       interpolation: false,  // only for image and circularImage shapes
       useImageSize: false,  // only for image and circularImage shapes
       useBorderWithImage: false  // only for image shape
-    }
+    },
     size: 25,
     title: undefined,
     value: undefined,
