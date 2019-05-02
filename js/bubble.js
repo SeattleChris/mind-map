@@ -6,7 +6,7 @@ ctx.fillRect(10, 10, 150, 100);
 let concepts = [];
 let links = [];
 
-function Links(from, to, weight) {
+function Link(from, to, weight) {
   this.from = from;
   this.to = to;
   this.title = `${from}-${to}`;
@@ -29,12 +29,12 @@ function Concept(id, name, description, relations) {
       if (related.direction === 'to') {
         // delete related.direction;
         this.children.push(related);
-        new Links(this.id, related.id, related.weight);
+        new Link(this.id, related.id, related.weight);
         // TODO: concepts[related.id].parents.push(this);
       } else if (related.direction === 'from') {
         // delete related.direction;
-        this.parent.push(related);
-        Links(related.id, this.id, related.weight);
+        this.parents.push(related);
+        new Link(related.id, this.id, related.weight);
         // TODO: concepts[related.id].children.push(this);
       }
     }  // end for loop of relations
@@ -60,6 +60,12 @@ new Concept(20, '1st of Another', 'Another Big Idea is supported by this', []);
 new Concept(22, '2nd of Another', '2nd support of Another Big Idea', []);
 new Concept(100, 'Big Idea', 'This is one of the biggest ideas', bigChildren);
 new Concept(200, 'Another Big Idea', 'Second big thought', anotherChildren);
+
+let linkRelation = [
+  { direction: 'from', id: 100, weight: 20 },
+  { direction: 'from', id: 200, weight: 40 }
+];
+new Concept(50, 'Linking Concept', 'This will be a child of both Big and Another', linkRelation);
 console.log(concepts);
 console.log(links);
 
